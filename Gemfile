@@ -9,7 +9,8 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.1.6'
 # Use sqlite3 as the database for Active Record
-
+#By hashing the password with bcrypt, we ensure that an attacker won’t be able to log in to the site even if they manage to obtain a copy of the database.
+gem 'bcrypt',         '3.1.12'
 #bootstrapp-sass gem v  
 gem 'bootstrap-sass', '3.3.7'
 # Use Puma as the app server
