@@ -6,8 +6,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
                     
   before_save { email.downcase! }
-  validates :password, presence: true, length: { minimum: 6 }
- has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+ has_secure_password # has_secure_password includes a separate presence validation that specifically catches nil passwords.
  
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
