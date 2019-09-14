@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
  
 
+    
+  namespace :api, defaults: {format: :json} do
+      namespace :v1 do
+        resources :users
+      end
+    end
+  
   # static pages controller routes 
   root "static_pages#home"
  
