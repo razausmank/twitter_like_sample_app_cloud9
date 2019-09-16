@@ -2,11 +2,17 @@ Rails.application.routes.draw do
  
 
     
-  namespace :api, defaults: {format: :json} do
-      namespace :v1 do
-        resources :users
-      end
-    end
+  # namespace :api, defaults: {format: :json} do
+  #     namespace :v1 do
+  #       resources :users
+  #     end
+  #   end
+  
+  Rails.application.routes.draw do
+  resources :cars, param: :_username
+  post '/auth/login', to: 'authentication#login'
+  get '/*a', to: 'application#not_found'
+  end
   
   # static pages controller routes 
   root "static_pages#home"
