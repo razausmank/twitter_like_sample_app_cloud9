@@ -5,7 +5,7 @@ module Api::V1
 
     # POST /v1/users
               def index
-                @pens = Pen.all
+                 respond_with Pen.all
                              render json:{status: 'Error', message:'created User failed', data:@pen}
               end
             
