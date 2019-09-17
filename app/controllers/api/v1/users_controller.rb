@@ -5,7 +5,7 @@ module Api::V1
 
     # POST /v1/users
     def index
-      respond_with User.first(5)
+      respond_with User.all
     end
     
   def create
