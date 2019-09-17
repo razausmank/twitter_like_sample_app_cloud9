@@ -8,7 +8,7 @@ class CarsController < ApplicationController
     render json: @cars, status: :ok
   end
 
-  # GET /cars/{carname}
+  # GET /cars/{username}
   def show
     render json: @car, status: :ok
   end
@@ -24,7 +24,7 @@ class CarsController < ApplicationController
     end
   end
 
-  # PUT /cars/{carname}
+  # PUT /cars/{username}
   def update
     unless @car.update(car_params)
       render json: { errors: @car.errors.full_messages },
@@ -32,7 +32,7 @@ class CarsController < ApplicationController
     end
   end
 
-  # DELETE /cars/{carname}
+  # DELETE /cars/{username}
   def destroy
     @car.destroy
   end
@@ -40,14 +40,14 @@ class CarsController < ApplicationController
   private
 
   def find_car
-    @car = car.find_by_carname!(params[:_carname])
+    @car = car.find_by_username!(params[:_username])
     rescue ActiveRecord::RecordNotFound
       render json: { errors: 'car not found' }, status: :not_found
   end
 
   def car_params
     params.permit(
-      :avatar, :name, :carname, :email, :password, :password_confirmation
+      :avatar, :name, :username, :email, :password, :password_confirmation
     )
   end
 end
