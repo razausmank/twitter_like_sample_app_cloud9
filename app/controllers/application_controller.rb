@@ -6,24 +6,21 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
     include SessionsHelper
-    
-    def not_found
-    render json: { error: 'not_found' }
-  end
 
-  def authorize_request
-    header = request.headers['Authorization']
-    header = header.split(' ').last if header
-    begin
-      @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { errors: e.message }, status: :unauthorized
-    rescue JWT::DecodeError => e
-      render json: { errors: e.message }, status: :unauthorized
-    end
-  end
- 
+ def authenticate_pen!
+  authenticate_pen_from_token!
+  super
+end
+
+
+def authenticate_pen_from_token!
+  Pen.find_by_authentication_token(pen_token)
+end
+
+def pen_token
+  request.headers['X-AUTH-TOKEN'].presence || params['auth_token'].presence
+end
+
     def logged_in_user
       unless logged_in?
        store_location

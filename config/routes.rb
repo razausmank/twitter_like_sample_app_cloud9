@@ -2,6 +2,7 @@ Rails.application.routes.draw do
  
 
     
+  resources :pens
   # namespace :api, defaults: {format: :json} do
   #     namespace :v1 do
   #       resources :users
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   #   end
   
   Rails.application.routes.draw do
+  resources :pens
   resources :cars, param: :_username
   post '/auth/login', to: 'authentication#login'
   get '/*a', to: 'application#not_found'
